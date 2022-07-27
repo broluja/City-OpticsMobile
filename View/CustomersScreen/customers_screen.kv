@@ -1,0 +1,63 @@
+#: import os os
+
+
+<RecycleViewLabel@Label>
+    size_hint: None, None
+    size: self.texture_size
+    pos_hint: {"center_x": .5}
+    font_size: dp(20)
+
+
+<CustomersDataWidget>:
+    RecycleViewLabel:
+        text: root.primary_data
+        bold: True
+
+    RecycleViewLabel:
+        text: root.secondary_data
+
+
+<CustomersScreenView>
+    recycle_view_customers: recycle_view_customers
+    on_pre_enter:
+        self.customers = app.data
+
+    FitImage:
+        source: f"{os.environ['CITY_OPTICS_APP']}/assets/images/customers.jpg"
+        canvas.after:
+            Color:
+                rgba: 0, 0, 0, .4
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(10)
+        spacing: dp(20)
+
+        MDLabel:
+            text: 'Registered Customers'
+            font_style: app.font_style
+            color: 1,1,1
+            halign: 'center'
+            adaptive_height: True
+
+        RecycleView:
+            id: recycle_view_customers
+            viewclass: 'CustomersDataWidget'
+            RecycleBoxLayout:
+                spacing: dp(20)
+                default_size: None, dp(80)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+
+        MDRoundFlatButton:
+            theme_text_color: 'Hint'
+            text: "Back"
+            font_size: dp(60)
+            valign: "top"
+            pos_hint: {"center_x": .5}
+            on_press: app.manager_screen.switch_screen("main")

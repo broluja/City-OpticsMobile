@@ -1,0 +1,118 @@
+#: import os os
+#: import http_manager View.Managers.http_manager.http_manager
+
+
+<PrefilledFormTextField@MDTextField>
+    multiline: True
+    write_tab: False
+    size_hint: None, None
+    width: app.textfield_width
+    height: app.textfield_height
+    font_size: dp(25)
+
+
+<WidgetLabel@Label>
+    size_hint: None, None
+    size: self.texture_size
+    pos_hint: {"center_x": .5}
+    font_size: dp(18)
+
+
+<PrefilledForm>:
+    orientation: "vertical"
+    spacing: dp(10)
+    size_hint_y: None
+    height: dp(350)
+
+    PrefilledFormTextField:
+        id: name
+        hint_text: "Name"
+
+    PrefilledFormTextField:
+        id: description
+        multiline: True
+        hint_text: "Description"
+
+    PrefilledFormTextField:
+        id: price
+        hint_text: "Price"
+
+    MDLabel:
+        text: "Available"
+
+    MDCheckbox:
+        id: present
+        active: True
+        size_hint: None, None
+        size: "48dp", "48dp"
+
+
+<ProductsWidget>:
+    WidgetLabel:
+        text: root.primary_data
+        bold: True
+
+    WidgetLabel:
+        text: root.secondary_data
+
+    MDTextButton:
+        text: root.tertiary_data
+        size_hint: None, None
+        pos_hint: {"center_x": .5}
+        font_size: dp(18)
+        on_release:
+            root.edit_data(root.primary_data, app.token)
+
+
+<ProductsScreenView>:
+    recycle_view: recycle_view
+    on_pre_enter:
+        self.products = app.data
+        self.refresh_recycle_view()
+
+    FitImage:
+        source: f"{os.environ['CITY_OPTICS_APP']}/assets/images/infinite-loop-02.png"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(10)
+        spacing: dp(20)
+
+        MDLabel:
+            text: 'Available Products'
+            font_style: app.font_style
+            color: 1,1,1
+            halign: 'center'
+            adaptive_height: True
+
+        MDIconButton:
+            icon: "refresh"
+            pos_hint: {"center_x": .5}
+            on_press:
+                app.manager_screen.switch_screen('main')
+                data = http_manager.get_data('products', app.token)
+                app.data = data
+                app.manager_screen.switch_screen('products')
+
+        RecycleView:
+            id: recycle_view
+            viewclass: 'ProductsWidget'
+            RecycleBoxLayout:
+                spacing: dp(20)
+                default_size: None, dp(80)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                multiselect: True
+                touch_multiselect: True
+
+        MDRoundFlatButton:
+            theme_text_color: 'Hint'
+            text: "Back"
+            font_size: dp(62)
+            size_hint: None, None
+            size:dp(110), dp(40)
+            valign: "top"
+            pos_hint: {"center_x": .5}
+            on_press: app.manager_screen.switch_screen("main")

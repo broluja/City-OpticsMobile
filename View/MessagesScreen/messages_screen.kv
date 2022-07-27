@@ -1,0 +1,53 @@
+<MessagesScreenView>:
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(10)
+
+        MDToolbar:
+            elevation: 10
+            title: "Customer`s Messages"
+
+        ScrollView:
+            MDList:
+                id: md_list
+                padding: 0
+
+        MDBoxLayout:
+            spacing: dp(20)
+            padding: dp(20)
+            MDRectangleFlatButton:
+                text: 'Reply'
+                font_size: dp(28)
+                on_release: root.open_dialog()
+
+            MDRectangleFlatButton:
+                text: 'Back'
+                font_size: dp(28)
+                on_release: root.back()
+
+
+<Content>
+    orientation: "vertical"
+    spacing: dp(10)
+    size_hint_y: None
+    height: dp(250)
+
+    MDTextField:
+        id: title
+        hint_text: "Title"
+        write_tab: False
+        size_hint: None, None
+        width: dp(150)
+        height: dp(20)
+        font_size: dp(26)
+
+    MDTextField:
+        id: content
+        hint_text: "Content"
+        multiline: True
+        write_tab: False
+        halign: 'center'
+        size_hint: None, None
+        width: root.width
+        height: dp(20)
+        font_size: dp(26)

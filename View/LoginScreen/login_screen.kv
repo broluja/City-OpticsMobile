@@ -1,0 +1,69 @@
+#: import os os
+#: import platform kivy
+#: import get_hex_from_color kivy.utils.get_hex_from_color
+#: set primary get_hex_from_color(app.theme_cls.primary_color)
+
+<LoginTextField@MDTextField>
+    multiline: False
+    write_tab: False
+    halign: 'center'
+    size_hint: None, None
+    width: app.textfield_width
+    font_size: app.textfield_font
+    line_color_focus: 0, 1, 0, 1
+    hint_text_color_normal: 1, 1, 1, 1
+    line_color_normal: 1, 1, 1, 1
+
+<LoginScreenView>
+    on_leave: self.clear_text()
+    FitImage:
+        source:  f"{os.environ['CITY_OPTICS_APP']}/assets/images/infinite-loop-01.png"
+
+    MDLabel:
+        markup: True
+        text: f"[ref=<str>][color={primary}]city-optics.net[/color][/ref]"
+        on_ref_press: app.open_in_browser()
+        halign: 'center'
+        adaptive_height: True
+        adaptive_width: True
+        pos_hint: {"center_x": .05, "center_y": .95} if platform != 'android' else {"center_x": .5, "center_y": .97}
+        font_size: dp(15)
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: dp(40)
+        spacing: dp(20)
+        LoginTextField:
+            id: username
+            hint_text: 'username'
+            pos_hint: {'center_x': .5, 'top': .9}
+
+        LoginTextField:
+            id: password
+            hint_text: 'password'
+            pos_hint: {'center_x': .5, 'top': .8}
+            password: True
+            password_mask: "*"
+            on_text_validate: root.login()
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: dp(100)
+            spacing: dp(15)
+
+            MDRectangleFlatButton:
+                text: 'Sign In'
+                pos_hint: {"center_x": .5}
+                font_size: app.textfield_font
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, .9
+                on_press: root.login()
+
+            MDLabel:
+                markup: True
+                color: 1,1,1
+                text: f"Don`t have an account?[ref=<str>][color={primary}][b] Sign Up![/b][/color][/ref]"
+                halign: 'center'
+                adaptive_height: True
+                font_size: dp(20)
+                on_ref_press: app.manager_screen.switch_screen('register')

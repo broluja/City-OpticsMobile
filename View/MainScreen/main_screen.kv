@@ -1,0 +1,61 @@
+#: import os os
+
+<MainScreenView>
+    FitImage:
+        source: f"{os.environ['CITY_OPTICS_APP']}/assets/images/infinite-loop-01.png"
+
+    MDLabel:
+        markup: True
+        text: f"[ref=<str>][color={primary}]city-optics.net[/color][/ref]"
+        on_ref_press: app.open_in_browser()
+        halign: 'center'
+        adaptive_height: True
+        adaptive_width: True
+        pos_hint: {"center_x": .05, "center_y": .95} if platform != 'android' else {"center_x": .5, "center_y": .97}
+        font_size: dp(15)
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding:dp(20)
+        MDLabel:
+            id: time
+            text: 'Current Time'
+            font_style: 'H6'
+            halign: 'center'
+            theme_text_color: 'Custom'
+            color: 1,1,1, .9
+
+        MDLabel:
+            id: info
+            text: 'CityOptics'
+            font_style: 'H3'
+            halign: 'center'
+            theme_text_color: 'Custom'
+            color: 1,1,1
+            adaptive_height: True
+            pos_hint: {'top': .57}
+
+        MDLabel:
+            id: info
+            text: 'Best optics and eye care in the city!!'
+            halign: 'center'
+            theme_text_color: 'Custom'
+            color: 1,1,1
+            adaptive_height: True
+            pos_hint: {'top': .5}
+
+        MDLabel:
+            id: info
+            text: 'Welcome Admin'
+            font_style: 'H3'
+            halign: 'center'
+            theme_text_color: 'Hint'
+
+        FloatLayout:
+            pos: 0, 0
+            size: root.width, root.height
+            padding: dp(10)
+            MDFloatingActionButtonSpeedDial:
+                callback:root.callback
+                data: root.data
+                root_button_anim: True

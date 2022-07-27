@@ -1,0 +1,60 @@
+#: import os os
+
+
+<RecycleViewLabel@Label>
+    size_hint: None, None
+    size: self.texture_size
+    pos_hint: {"center_x": .5}
+    font_size: dp(20)
+
+
+<OrdersDataWidget>:
+    RecycleViewLabel:
+        text: root.primary_data
+        bold: True
+
+    RecycleViewLabel:
+        text: root.secondary_data
+
+    RecycleViewLabel:
+        text: root.tertiary_data
+
+
+<OrdersScreenView>
+    recycleView: recycleView
+    on_pre_enter:
+        self.orders = app.data
+
+    FitImage:
+        source: f"{os.environ['CITY_OPTICS_APP']}/assets/images/infinite-loop-03.png"
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(10)
+
+        MDLabel:
+            text: 'Orders'
+            font_style: app.font_style
+            color: 1,1,1
+            halign: 'center'
+            adaptive_height: True
+
+        RecycleView:
+            id: recycleView
+            viewclass: 'OrdersDataWidget'
+            RecycleBoxLayout:
+                spacing: dp(20)
+                default_size: None, dp(80)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+
+        MDRoundFlatButton:
+            theme_text_color: 'Hint'
+            text: "Back"
+            font_size: dp(62)
+            valign: "top"
+            pos_hint: {"center_x": .5}
+            on_press: app.manager_screen.switch_screen("main")
