@@ -18,7 +18,7 @@ class HttpManager(object):
     headers = {'Content-type': 'application/json'}
 
     def __init__(self):
-        self.domain = 'http://127.0.0.1:8000/'
+        self.domain = 'http://127.0.0.1:8000/'  # To be changed in production
 
     def user_login(self, username: str, password: str, on_complete, on_error):
 

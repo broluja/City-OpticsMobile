@@ -1,4 +1,5 @@
 from kivy.properties import ObjectProperty, StringProperty, ListProperty, NumericProperty
+from kivy.metrics import dp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDFlatButton
@@ -39,6 +40,8 @@ class ProductsWidget(MDBoxLayout):
         self.dialog_box = MDDialog(title="Edit Product:",
                                    type="custom",
                                    content_cls=PrefilledForm(),
+                                   size_hint=(None, None),
+                                   width=dp(600),
                                    buttons=[
                                        MDFlatButton(text="DELETE", theme_text_color="Custom", on_press=self.delete),
                                        MDFlatButton(text="CANCEL", theme_text_color="Custom",

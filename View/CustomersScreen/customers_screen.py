@@ -10,8 +10,9 @@ class CustomersScreenView(MDScreen):
 
     def data_from_dataset(self):
         dict_comprehension = [{
-            'primary_data': customer['email'] + ' - Phone: ' + str(customer['phone']),
-            'secondary_data': 'Used discount: ' + str(customer['discount_used']) + ' - code: ' + customer['code']
+            'primary_data': f'{customer["email"]} Phone: {str(customer["phone"])}',
+            'secondary_data': f'Used discount: {str(customer["discount_used"])}',
+            'tertiary_data': f'Code: {customer["code"]}'
         }
             for customer in self.customers]
         self.recycle_view_customers.data = dict_comprehension
@@ -30,3 +31,4 @@ class CustomersDataWidget(MDBoxLayout):
     orientation = 'vertical'
     primary_data = StringProperty("")
     secondary_data = StringProperty("")
+    tertiary_data = StringProperty()
