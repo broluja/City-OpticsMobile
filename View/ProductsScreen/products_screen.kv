@@ -15,7 +15,7 @@
     size_hint: None, None
     size: self.texture_size
     pos_hint: {"center_x": .5}
-    font_size: dp(18)
+    font_size: app.font_size
 
 
 <PrefilledForm>:
@@ -48,6 +48,8 @@
 
 
 <ProductsWidget>:
+    orientation: 'vertical'
+    spacing: dp(10)
     WidgetLabel:
         text: root.primary_data
         bold: True
@@ -98,8 +100,9 @@
             id: recycle_view
             viewclass: 'ProductsWidget'
             RecycleBoxLayout:
-                spacing: dp(20)
-                default_size: None, dp(80)
+                padding: dp(50)
+                spacing: dp(30)
+                default_size: None, app.font_size * 4
                 default_size_hint: 1, None
                 size_hint_y: None
                 height: self.minimum_height

@@ -16,7 +16,6 @@ class ProductsWidget(MDBoxLayout):
     token = StringProperty()
     data = ListProperty()  # Holding list of available products
     dialog_box = ObjectProperty()  # Box for editing single product
-    orientation = 'vertical'
     primary_data = StringProperty("")
     secondary_data = StringProperty("")
     tertiary_data = StringProperty("")

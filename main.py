@@ -28,12 +28,14 @@ class CityOpticsApp(MDApp):
             self.textfield_height = dp(48)
             self.textfield_font = dp(28)
             self.font_style = 'H5'
+            self.font_size = dp(20)
             self.button_size = dp(200)
         else:
             self.textfield_width = dp(550)
             self.textfield_height = dp(90)
             self.textfield_font = dp(46)
             self.font_style = 'H2'
+            self.font_size = dp(28)
             self.button_size = dp(300)
 
     def __str__(self):

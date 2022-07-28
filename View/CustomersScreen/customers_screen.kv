@@ -5,7 +5,7 @@
     size_hint: None, None
     size: self.texture_size
     pos_hint: {"center_x": .5}
-    font_size: dp(20)
+    font_size: app.font_size
 
 
 <CustomersDataWidget>:
@@ -48,7 +48,7 @@
             viewclass: 'CustomersDataWidget'
             RecycleBoxLayout:
                 spacing: dp(20)
-                default_size: None, dp(80)
+                default_size: None, app.font_size * 4
                 default_size_hint: 1, None
                 size_hint_y: None
                 height: self.minimum_height
